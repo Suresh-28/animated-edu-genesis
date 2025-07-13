@@ -1,11 +1,14 @@
-import { Facebook, Twitter, Instagram, Linkedin, Youtube, Mail, MapPin, Phone, Heart } from 'lucide-react';
+import { useState } from 'react';
+import { Facebook, Twitter, Instagram, Linkedin, Youtube, Mail, MapPin, Phone, Heart, ShieldCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 import { ThemeToggle } from './ThemeToggle';
 import { AnimatedSection } from './AnimatedSection';
+import { StudentVerificationDialog } from './StudentVerificationDialog';
 
 export function Footer() {
+  const [showVerificationDialog, setShowVerificationDialog] = useState(false);
   const currentYear = new Date().getFullYear();
 
   const footerLinks = {
@@ -147,6 +150,15 @@ export function Footer() {
                     </a>
                   </li>
                 ))}
+                <li>
+                  <button 
+                    onClick={() => setShowVerificationDialog(true)}
+                    className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm flex items-center gap-1"
+                  >
+                    <ShieldCheck className="w-3 h-3" />
+                    Verify Status
+                  </button>
+                </li>
               </ul>
             </div>
           </AnimatedSection>
@@ -242,6 +254,11 @@ export function Footer() {
             </div>
           </AnimatedSection>
         </div>
+
+        <StudentVerificationDialog 
+          open={showVerificationDialog}
+          onOpenChange={setShowVerificationDialog}
+        />
       </div>
     </footer>
   );

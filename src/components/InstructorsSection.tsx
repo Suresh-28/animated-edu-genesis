@@ -1,11 +1,14 @@
-import { Github, Linkedin, Twitter, Award, BookOpen, Users } from 'lucide-react';
+import { useState } from 'react';
+import { Github, Linkedin, Twitter, Award, BookOpen, Users, GraduationCap } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { AnimatedSection } from './AnimatedSection';
+import { InstructorApplicationDialog } from './InstructorApplicationDialog';
 
 export function InstructorsSection() {
+  const [showApplicationDialog, setShowApplicationDialog] = useState(false);
   const instructors = [
     {
       id: 1,
@@ -249,15 +252,20 @@ export function InstructorsSection() {
               Want to become an instructor and share your expertise?
             </p>
             <Button 
-              variant="outline" 
               size="lg" 
-              className="px-8 py-4 text-lg border-2 border-accent text-accent hover:bg-accent hover:text-accent-foreground transition-all duration-300"
+              className="bg-gradient-primary hover:scale-105 transition-all duration-300 shadow-glow px-8 py-4 text-lg"
+              onClick={() => setShowApplicationDialog(true)}
             >
-              <Award className="w-5 h-5 mr-2" />
+              <GraduationCap className="w-5 h-5 mr-2" />
               Become an Instructor
             </Button>
           </div>
         </AnimatedSection>
+
+        <InstructorApplicationDialog 
+          open={showApplicationDialog}
+          onOpenChange={setShowApplicationDialog}
+        />
       </div>
     </section>
   );

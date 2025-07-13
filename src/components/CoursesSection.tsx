@@ -4,9 +4,13 @@ import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { AnimatedSection } from './AnimatedSection';
+import { EnrollmentDialog } from './EnrollmentDialog';
+import { Link } from 'react-router-dom';
 
 export function CoursesSection() {
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [showEnrollmentDialog, setShowEnrollmentDialog] = useState(false);
+  const [selectedCourse, setSelectedCourse] = useState<any>(null);
 
   const categories = ['All', 'Development', 'Design', 'Business', 'Photography', 'AI/ML'];
 
@@ -120,6 +124,11 @@ export function CoursesSection() {
     }
   };
 
+  const handleEnrollClick = (course: any) => {
+    setSelectedCourse(course);
+    setShowEnrollmentDialog(true);
+  };
+
   return (
     <section id="courses" className="py-20 bg-gradient-to-br from-background to-primary/5">
       <div className="container mx-auto px-4">
@@ -229,6 +238,7 @@ export function CoursesSection() {
                   </div>
                   <Button 
                     className="bg-gradient-primary hover:scale-105 transition-all duration-300 shadow-soft"
+                    onClick={() => handleEnrollClick(course)}
                   >
                     Enroll Now
                   </Button>
@@ -240,15 +250,23 @@ export function CoursesSection() {
 
         <AnimatedSection animation="fade-in-up" delay={600}>
           <div className="text-center mt-12">
-            <Button 
-              variant="outline" 
-              size="lg" 
-              className="px-8 py-4 text-lg border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
-            >
-              View All Courses
-            </Button>
+            <Link to="/courses">
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="px-8 py-4 text-lg border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+              >
+                View All Courses
+              </Button>
+            </Link>
           </div>
         </AnimatedSection>
+
+        <EnrollmentDialog 
+          open={showEnrollmentDialog}
+          onOpenChange={setShowEnrollmentDialog}
+          course={selectedCourse}
+        />
       </div>
     </section>
   );

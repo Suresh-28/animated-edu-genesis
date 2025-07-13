@@ -3,9 +3,12 @@ import { GraduationCap, Rocket, Sparkles, Play, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { AnimatedSection } from './AnimatedSection';
+import { WatchDemoDialog } from './WatchDemoDialog';
+import { Link } from 'react-router-dom';
 
 export function HeroSection() {
   const [typedText, setTypedText] = useState('');
+  const [showDemoDialog, setShowDemoDialog] = useState(false);
   const fullText = 'TRANSFORM YOUR FUTURE WITH WORLD-CLASS EDUCATION';
 
   useEffect(() => {
@@ -58,19 +61,22 @@ export function HeroSection() {
 
         <AnimatedSection animation="fade-in-up" delay={800}>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-            <Button 
-              size="lg" 
-              className="group px-8 py-4 text-lg font-semibold bg-gradient-primary hover:scale-105 transition-all duration-300 shadow-glow"
-            >
-              <GraduationCap className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform duration-300" />
-              Explore Courses
-              <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
-            </Button>
+            <Link to="/courses">
+              <Button 
+                size="lg" 
+                className="group px-8 py-4 text-lg font-semibold bg-gradient-primary hover:scale-105 transition-all duration-300 shadow-glow"
+              >
+                <GraduationCap className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform duration-300" />
+                Explore Courses
+                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+              </Button>
+            </Link>
             
             <Button 
               variant="outline" 
               size="lg" 
               className="group px-8 py-4 text-lg font-semibold border-2 border-accent text-accent hover:bg-accent hover:text-accent-foreground transition-all duration-300"
+              onClick={() => setShowDemoDialog(true)}
             >
               <Play className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform duration-300" />
               Watch Demo
@@ -108,6 +114,11 @@ export function HeroSection() {
           </div>
         </div>
       </div>
+
+      <WatchDemoDialog 
+        open={showDemoDialog} 
+        onOpenChange={setShowDemoDialog} 
+      />
     </section>
   );
 }
