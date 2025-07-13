@@ -1,5 +1,7 @@
-# Animated Edu Genesis 🎓✨
+<img width="1911" height="908" alt="Screenshot 2025-07-13 172413" src="https://github.com/user-attachments/assets/2ccfb25d-3a48-4c46-be65-ac7e9cde7360" />
 
+
+# Animated Edu Genesis 🎓✨
 A dynamic, animation-rich educational landing page built with Lovable AI. Designed to captivate and engage learners, this template offers a modern, interactive experience for educational institutions, courses, or learning platforms.
 
 ---
